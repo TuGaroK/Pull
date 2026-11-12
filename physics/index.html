@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050706">
+<title>Физика: теория</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#050706;--bg2:#0D110F;--ink:#E1E5E1;--muted:#858E88;--line:#303A33;--acc:#358855;--acc-hi:#4AA36C;--frame:#46524A;
+--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--serif:"PT Serif",Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 var(--mono);-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+::selection{background:#1C4A2E;color:#fff}
+:focus-visible{outline:1px dashed var(--acc-hi);outline-offset:3px}
+a{color:var(--acc)}
+.wrap{width:100%;max-width:960px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.rule{flex:1 1 0;min-width:2ch;overflow:hidden;white-space:pre;color:var(--line);user-select:none}
+.pr{color:var(--acc)}
+.bar{display:flex;align-items:baseline;gap:1.5ch;padding-top:22px;font-size:13px;color:var(--muted)}
+.bar .brand{white-space:nowrap}
+.bar .brand b{color:var(--acc);font-weight:500}
+.hero{padding:64px 0 0}
+h1{margin:0;padding-left:2ch;text-indent:-2ch;font:700 clamp(22px,4.2vw,32px)/1.3 var(--mono);letter-spacing:-.01em;text-wrap:balance}
+h1 .pr{font-weight:400}
+.lead{margin:14px 0 0;max-width:70ch;color:var(--muted)}
+.toc,nav.ftoc{display:flex;flex-wrap:wrap;gap:4px 2ch;margin:22px 0 0}
+.toc a,nav.ftoc a{color:var(--acc);text-decoration:none;white-space:nowrap;padding:3px 0}
+.toc a::before,nav.ftoc a::before{content:"[";color:var(--muted)}
+.toc a::after,nav.ftoc a::after{content:"]";color:var(--muted)}
+nav.ftoc{margin:0 0 10px;font-size:14px}
+h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 2ch;margin:56px 0 6px;font:700 19px/1.4 var(--mono);scroll-margin-top:18px}
+h2::before{content:"##";color:var(--acc);font-weight:400}
+h2 .num{display:none}
+h2 .t{margin-left:auto;color:var(--muted);font-weight:400;font-size:13px}
+h3{margin:30px 0 4px;font:500 15px/1.5 var(--mono);color:var(--muted)}
+h3::before{content:"-- "}
+p{margin:0}
+p+p{margin-top:8px}
+ol.terms{margin:14px 0 0;padding-left:5ch;columns:2 30ch;column-gap:4ch}
+ol.terms li{break-inside:avoid;padding:2px 0}
+ol.terms li::marker{color:var(--acc);font-size:13px}
+ol.terms a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--frame)}
+.note.solo{padding:16px 0 18px;border-top:1px dotted var(--line);scroll-margin-top:12px;max-width:86ch}
+.note.solo:target .thn{color:var(--acc-hi)}
+.note.solo.warn{margin:14px 0 18px;padding:10px 0 10px 2ch;border-top:0;border-left:2px solid var(--acc)}
+.note b{font-weight:700}
+.th{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 1.5ch;margin-bottom:8px}
+.th .num{color:var(--acc);font-weight:700}
+.th .num::before{content:"[";color:var(--muted);font-weight:400}
+.th .num::after{content:"]";color:var(--muted);font-weight:400}
+.th .kind{color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.th .kind .u{text-transform:none;letter-spacing:0}
+.th .thn{font-weight:700;font-size:16px}
+.th .ref{margin-left:auto;color:var(--muted);font-size:12.5px}
+.src{margin-top:8px;color:var(--muted);font-size:13.5px}
+.f,.fx,.nu{font-family:var(--serif);font-size:1.12em}
+.f,.sq{white-space:nowrap}
+.nu{font-style:normal}
+.fx .nu,.f .nu{font-size:1em}
+.note.solo>i,.note.solo p>i,.fl>i,.cond>i,.thn>i,.fsubt>i{font-family:var(--serif);font-size:1.12em}
+.vec{position:relative;display:inline-block;font-style:italic}
+.vec::before{content:"→";position:absolute;left:50%;top:-.5em;transform:translateX(-46%);font-size:.72em;font-style:normal;line-height:1}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;font-size:.92em;line-height:1.2}
+.fr>span{padding:1px .25em;white-space:nowrap}
+.fr>span:first-child{border-bottom:1px solid currentColor}
+.sq>.rt{display:inline-block;font-size:1.3em;vertical-align:-.08em}
+.sq>span:not(.rt){display:inline-block;border-top:1px solid currentColor;padding:2px .15em 0;margin-left:.05em}
+.star{color:var(--acc-hi);font-style:normal;letter-spacing:0}
+.box{display:inline-block;border:1px solid var(--acc);padding:2px 8px;margin:2px 0}
+.cond{margin:4px 0 10px;padding:8px 2ch;background:var(--bg2)}
+.frow{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:4px 3ch;align-items:center;padding:9px 0;border-bottom:1px dotted var(--line)}
+.frow:last-child{border-bottom:0}
+.fl{color:var(--muted);font-size:14px}
+.fl b{color:var(--ink)}
+.ff{min-width:0}
+.fnote{margin-top:10px}
+.fsub{margin-top:16px;padding-left:2ch;border-left:1px dashed var(--line)}
+.fsubt{color:var(--acc);margin-bottom:4px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;font-size:14px}
+th,td{padding:4px 3ch 4px 0;border-bottom:1px dotted var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.foot{padding-top:44px;padding-bottom:56px;color:var(--muted);font-size:13px;text-align:center}
+.foot .rl{display:flex;gap:1.5ch;align-items:baseline}
+.foot .rl b{color:var(--acc);font-weight:500}
+.foot p{margin:14px 0 0}
+@media (hover:hover){a:hover{color:var(--acc-hi)}ol.terms a:hover{color:var(--acc-hi);border-color:var(--acc-hi)}}
+@media (max-width:600px){
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero{padding-top:40px}
+h2{margin-top:44px}
+h2 .t,.th .ref{margin-left:0;width:100%}
+.frow{grid-template-columns:minmax(0,1fr);padding:10px 0}
+.ff{overflow-x:auto}
+}
+@media print{:root{--bg:#fff;--bg2:#f2f2f2;--ink:#000;--muted:#444;--line:#999;--acc:#000;--frame:#666}.sw,.toc,nav.ftoc{display:none!important}.note.solo{break-inside:avoid}}
+.bar{flex-wrap:wrap}.sw{display:inline-flex;gap:2ch;white-space:nowrap}.sw a{color:var(--muted);text-decoration:none}.sw a[aria-current]{color:var(--acc)}@media (hover:hover){.sw a[href]:hover{color:var(--acc-hi)}}
+</style>
+</head>
+<body>
+<header class="wrap"><div class="bar"><span class="brand">[<b>Σ</b>] архив задач</span><span class="rule" aria-hidden="true">················································································································································································································································</span><nav class="sw" aria-label="Раздел сайта"><a href="../index.html">( )&nbsp;математика</a><a aria-current="page">(•)&nbsp;физика</a></nav></div><div class="hero"><h1><span class="pr" aria-hidden="true">&gt; </span>Физика: кинематика</h1><p class="lead">Термины с определениями и формулы с условиями применения. Ссылки «Л. §, с.» — Ландсберг, «Элементарный учебник физики», т. 1 (1985). <span class="star">★</span> — материал для старших классов.</p><nav class="toc" aria-label="Разделы"><a href="#s1">термины</a><a href="#s2">определения</a><a href="#s3">формулы</a></nav></div></header>
+<main class="wrap">
+<h2 id="s1"><span class="num">1</span>Список терминов<span class="t">21 + 4 ★</span></h2>
+<ol class="terms">
+  <li><a href="#d1">Кинематика</a></li>
+  <li><a href="#d2">Механическое движение и покой</a></li>
+  <li><a href="#d3">Материальная точка</a></li>
+  <li><a href="#d4">Тело отсчёта</a></li>
+  <li><a href="#d5">Система отсчёта</a></li>
+  <li><a href="#d6">Относительность движения</a></li>
+  <li><a href="#d7">Координата</a></li>
+  <li><a href="#d8">Траектория</a></li>
+  <li><a href="#d9">Путь</a></li>
+  <li><a href="#d10">Перемещение</a></li>
+  <li><a href="#d11">Прямолинейное и криволинейное движение</a></li>
+  <li><a href="#d12">Равномерное и неравномерное движение</a></li>
+  <li><a href="#d13">Равномерное прямолинейное движение</a></li>
+  <li><a href="#d14">Мгновенная скорость</a></li>
+  <li><a href="#d15">Средняя путевая скорость</a></li>
+  <li><a href="#d16">Средняя векторная скорость</a></li>
+  <li><a href="#d17">Ускорение</a></li>
+  <li><a href="#d18">Прямолинейное равноускоренное движение</a></li>
+  <li><a href="#d19">Свободное падение</a></li>
+  <li><a href="#d20">Поступательное движение</a></li>
+  <li><a href="#d21">Вращательное движение вокруг неподвижной оси</a></li>
+</ol>
+<h3><span class="star">★</span> Для старших классов: движение по окружности</h3>
+<ol class="terms" start="22">
+  <li><a href="#d22">Равномерное движение по окружности</a></li>
+  <li><a href="#d23">Период обращения</a></li>
+  <li><a href="#d24">Частота обращения</a></li>
+  <li><a href="#d25">Центростремительное ускорение</a></li>
+</ol>
+
+<h2 id="s2"><span class="num">2</span>Термины и определения<span class="t">21 + 4 ★</span></h2>
+<div class="note solo warn"><b>Все характеристики движения рассматриваются в выбранной системе отсчёта.</b> Обозначения: путь — <i>ℓ</i>, перемещение — <span class="vec">s</span>. У Ландсберга путь обозначен буквой <i>s</i>.</div>
+
+<div class="note solo" id="d1"><div class="th"><span class="num">1</span><span class="kind">Определение</span><span class="thn">Кинематика</span><span class="ref">Л. § 2, с. 21</span></div>
+<p>Раздел механики, описывающий движение тел без исследования причин изменения их движения.</p></div>
+
+<div class="note solo" id="d2"><div class="th"><span class="num">2</span><span class="kind">Определение</span><span class="thn">Механическое движение и покой</span><span class="ref">Л. § 1–2, с. 19–22</span></div>
+<p><b>Движение</b> — изменение положения тела или его частей относительно других тел с течением времени. <b>Покой</b> — сохранение положения тела в выбранной системе отсчёта.</p></div>
+
+<div class="note solo" id="d3"><div class="th"><span class="num">3</span><span class="kind">Модель</span><span class="thn">Материальная точка</span><span class="ref">Л. § 5, с. 25</span></div>
+<p>Модель тела, размерами и формой которого можно пренебречь в рассматриваемой задаче. Применимость модели зависит от задачи.</p></div>
+
+<div class="note solo" id="d4"><div class="th"><span class="num">4</span><span class="kind">Определение</span><span class="thn">Тело отсчёта</span><span class="ref">Л. § 2, с. 22</span></div>
+<p>Тело, относительно которого определяют положение и описывают движение других тел.</p></div>
+
+<div class="note solo" id="d5"><div class="th"><span class="num">5</span><span class="kind">Определение</span><span class="thn">Система отсчёта</span><span class="ref">Л. § 2, с. 22</span></div>
+<p>Тело отсчёта, связанная с ним система координат и прибор для измерения времени.</p></div>
+
+<div class="note solo" id="d6"><div class="th"><span class="num">6</span><span class="kind">Определение</span><span class="thn">Относительность движения</span><span class="ref">Л. § 2–3, с. 21–23</span></div>
+<p>Зависимость описания движения и состояния покоя от выбранной системы отсчёта. Например, одно тело может покоиться в одной системе и двигаться в другой. От системы отсчёта зависят траектория, путь, перемещение и скорость.</p></div>
+
+<div class="note solo" id="d7"><div class="th"><span class="num">7</span><span class="kind">Величина · <span class="u">м</span></span><span class="thn">Координата <i>x</i></span><span class="ref">Л. § 6, с. 26</span></div>
+<p>Число, задающее положение точки на оси: расстояние от начала отсчёта <i>O</i> до точки, взятое со знаком «+», если точка лежит от <i>O</i> по направлению оси, и со знаком «−», если против. Для движения вдоль одной прямой достаточно одной координаты <i>x</i>; на плоскости нужны две, в пространстве — три.</p></div>
+
+<div class="note solo" id="d8"><div class="th"><span class="num">8</span><span class="kind">Определение</span><span class="thn">Траектория</span><span class="ref">Л. § 3, с. 22</span></div>
+<p>Линия, которую описывает движущаяся точка в выбранной системе отсчёта.</p></div>
+
+<div class="note solo" id="d9"><div class="th"><span class="num">9</span><span class="kind">Величина · скаляр · <span class="u">м</span></span><span class="thn">Путь <i>ℓ</i></span><span class="ref">Л. § 6, с. 27</span></div>
+<p>Суммарная длина всех участков траектории, пройденных телом за рассматриваемое время, включая повторно пройденные участки. Путь — скалярная неотрицательная величина.</p></div>
+
+<div class="note solo" id="d10"><div class="th"><span class="num">10</span><span class="kind">Величина · вектор · <span class="u">м</span></span><span class="thn">Перемещение <span class="vec">s</span></span><span class="ref">Л. § 6, с. 27; § 25, с. 66</span></div>
+<p>Вектор, направленный из начального положения точки в её конечное положение. Его проекция на ось: <span class="f"><i>s<sub>x</sub></i> = <i>x</i><sub>2</sub> − <i>x</i><sub>1</sub></span>. При криволинейном движении перемещение не лежит на траектории.</p></div>
+
+<div class="note solo" id="dproj"><div class="th"><span class="kind">Пояснение</span><span class="thn">Проекция вектора на ось</span></div>
+<p>Число со знаком: координата конца вектора на этой оси минус координата его начала. Для перемещения <span class="f"><i>s<sub>x</sub></i> = <i>x</i><sub>2</sub> − <i>x</i><sub>1</sub></span>.</p>
+<p>Вектор направлен по оси — проекция равна его модулю. Против оси — модулю со знаком «−». Перпендикулярно оси — нулю. Модуль вектора — это его длина, он не бывает отрицательным.</p>
+<p>Так же устроены проекции скорости <span class="f"><i>v<sub>x</sub></i></span> и ускорения <span class="f"><i>a<sub>x</sub></i></span>: знак показывает направление относительно оси.</p>
+<p class="src"><span class="star">★</span> Если вектор образует угол <i>α</i> с положительным направлением оси, его проекция равна модулю, умноженному на cos&thinsp;<i>α</i>.</p></div>
+
+<div class="note solo" id="d11"><div class="th"><span class="num">11</span><span class="kind">Вид движения</span><span class="thn">Прямолинейное и криволинейное движение</span><span class="ref">Л. § 5, с. 25</span></div>
+<p>При прямолинейном движении траектория лежит на прямой; при криволинейном является кривой линией.</p></div>
+
+<div class="note solo" id="d12"><div class="th"><span class="num">12</span><span class="kind">Вид движения</span><span class="thn">Равномерное и неравномерное движение</span><span class="ref">Л. § 9, с. 35; § 25, с. 66</span></div>
+<p>При равномерном движении тело проходит равные пути за любые равные промежутки времени: модуль скорости постоянен. При неравномерном движении модуль скорости меняется.</p></div>
+
+<div class="note solo" id="d13"><div class="th"><span class="num">13</span><span class="kind">Вид движения</span><span class="thn">Равномерное прямолинейное движение</span><span class="ref">Л. § 9–10, с. 35–38</span></div>
+<p>Движение с постоянным вектором скорости: сохраняются и её модуль, и направление. За любые равные промежутки времени совершаются одинаковые перемещения.</p></div>
+
+<div class="note solo" id="d14"><div class="th"><span class="num">14</span><span class="kind">Величина · вектор · <span class="u">м/с</span></span><span class="thn">Мгновенная скорость <span class="vec">v</span></span><span class="ref">Л. § 15, с. 47; § 26, с. 66</span></div>
+<p>Векторная величина, характеризующая быстроту и направление движения в данный момент. Ненулевая скорость направлена по касательной к траектории в сторону движения. На достаточно малом промежутке времени её модуль <span class="f"><i>v</i> ≈ Δ<i>ℓ</i>/Δ<i>t</i></span>.</p></div>
+
+<div class="note solo" id="d15"><div class="th"><span class="num">15</span><span class="kind">Величина · скаляр · <span class="u">м/с</span></span><span class="thn">Средняя путевая скорость</span><span class="ref">Л. § 14, с. 45</span></div>
+<p>Отношение всего пройденного пути ко всему затраченному времени: <span class="f"><i>v</i><sub>ср.пут</sub> = <i>ℓ</i>/Δ<i>t</i></span>. Время остановок включается в рассматриваемый промежуток.</p></div>
+
+<div class="note solo" id="d16"><div class="th"><span class="num">16</span><span class="kind">Величина · вектор · <span class="u">м/с</span></span><span class="thn">Средняя векторная скорость</span><span class="ref">у Ландсберга нет</span></div>
+<p>Отношение перемещения к промежутку времени, за который оно совершено: <span class="f"><span class="vec">v</span><sub>ср</sub> = <span class="vec">s</span>/Δ<i>t</i></span>.</p>
+<p class="src">У Ландсберга «средняя скорость» — только путевая (§ 14).</p></div>
+
+<div class="note solo" id="d17"><div class="th"><span class="num">17</span><span class="kind">Величина · вектор · <span class="u">м/с²</span></span><span class="thn">Ускорение <span class="vec">a</span></span><span class="ref">Л. § 16, с. 49; § 27, с. 67</span></div>
+<p>Векторная величина, характеризующая быстроту изменения скорости — её модуля и/или направления. При постоянном ускорении <span class="f"><span class="vec">a</span> = (<span class="vec">v</span><sub>2</sub> − <span class="vec">v</span><sub>1</sub>)/Δ<i>t</i></span>. В общем случае это отношение определяет среднее ускорение; мгновенное получают, уменьшая промежуток времени к нулю.</p></div>
+
+<div class="note solo" id="d18"><div class="th"><span class="num">18</span><span class="kind">Вид движения</span><span class="thn">Прямолинейное равноускоренное движение</span><span class="ref">Л. § 16–18, с. 49–53</span></div>
+<p>Движение по прямой с постоянным вектором ускорения: <span class="f"><span class="vec">a</span> = const</span>. За любые равные промежутки времени вектор скорости изменяется одинаково. Здесь термин включает и движение с уменьшающимся модулем скорости.</p>
+<p class="src">Используется школьное определение через постоянство ускорения. У Ландсберга общее название — равнопеременное движение, а равноускоренное и равнозамедленное различаются по росту и уменьшению модуля скорости; там же: «иногда оба эти вида движения называют равноускоренными» (§ 18, с. 53).</p></div>
+
+<div class="note solo" id="d19"><div class="th"><span class="num">19</span><span class="kind">Вид движения</span><span class="thn">Свободное падение</span><span class="ref">Л. § 52–53, с. 111–113</span></div>
+<p>Движение тела под действием только силы тяжести. Сопротивление воздуха и другие воздействия отсутствуют либо ими пренебрегают. Начальная скорость может быть ненулевой. В данном месте Земли все свободно падающие тела движутся с одним и тем же ускорением <span class="vec">g</span>, направленным вертикально вниз; <span class="f"><i>g</i> ≈ 9,8 м/с²</span>.</p></div>
+
+<div class="note solo" id="d20"><div class="th"><span class="num">20</span><span class="kind">Вид движения</span><span class="thn">Поступательное движение</span><span class="ref">Л. § 4, с. 23</span></div>
+<p>Движение твёрдого тела, при котором любая прямая, проведённая в нём, остаётся параллельной своему первоначальному положению. В каждый момент скорости всех точек тела одинаковы.</p></div>
+
+<div class="note solo" id="d21"><div class="th"><span class="num">21</span><span class="kind">Вид движения</span><span class="thn">Вращательное движение вокруг неподвижной оси</span><span class="ref">Л. § 4, с. 24</span></div>
+<p>Движение твёрдого тела, при котором его точки вне оси движутся по окружностям с центрами на этой оси, в плоскостях, перпендикулярных ей. Точки на оси неподвижны.</p></div>
+
+<h3><span class="star">★</span> Для старших классов: движение по окружности</h3>
+
+<div class="note solo" id="d22"><div class="th"><span class="num">22</span><span class="kind">Вид движения</span><span class="thn">Равномерное движение по окружности</span><span class="ref">Л. § 27, с. 69</span></div>
+<p>Движение по окружности с постоянным модулем скорости. Направление скорости непрерывно меняется.</p></div>
+
+<div class="note solo" id="d23"><div class="th"><span class="num">23</span><span class="kind">Величина · <span class="u">с</span></span><span class="thn">Период обращения <i>T</i></span><span class="ref">—</span></div>
+<p>Время одного полного оборота при равномерном движении: <span class="f"><i>T</i> = Δ<i>t</i>/<i>N</i></span>, где <i>N</i> — число оборотов за время Δ<i>t</i>.</p></div>
+
+<div class="note solo" id="d24"><div class="th"><span class="num">24</span><span class="kind">Величина · <span class="u">Гц</span></span><span class="thn">Частота обращения <span class="nu">ν</span></span><span class="ref">Л. § 115, с. 222 (там — <i>n</i>)</span></div>
+<p>Число оборотов за единицу времени при равномерном движении: <span class="f"><span class="nu">ν</span> = <i>N</i>/Δ<i>t</i> = 1/<i>T</i></span>. Модуль скорости точки на окружности радиуса <i>R</i>: <span class="f"><i>v</i> = 2π<i>R</i>/<i>T</i> = 2π<i>R</i><span class="nu">ν</span></span>.</p></div>
+
+<div class="note solo" id="d25"><div class="th"><span class="num">25</span><span class="kind">Величина · вектор · <span class="u">м/с²</span></span><span class="thn">Центростремительное ускорение</span><span class="ref">Л. § 27, с. 69–70</span></div>
+<p>Ускорение, направленное к центру окружности и связанное с изменением направления скорости: <span class="f"><i>a</i><sub>ц</sub> = <i>v</i>²/<i>R</i></span>. При равномерном движении по окружности это полное ускорение тела.</p></div>
+
+<div class="note solo"><div class="th"><span class="kind">Единицы СИ</span></div>
+<div class="tablebox"><table>
+<tr><th>Величина</th><th>Единица</th></tr>
+<tr><td>координата, путь, модуль перемещения</td><td>м</td></tr>
+<tr><td>время, период</td><td>с</td></tr>
+<tr><td>скорость</td><td>м/с</td></tr>
+<tr><td>ускорение</td><td>м/с²</td></tr>
+<tr><td>частота</td><td>Гц = с⁻¹</td></tr>
+</table></div></div>
+
+<h2 id="s3"><span class="num">3</span>Формулы<span class="t">с условиями применения</span></h2><div class="note solo warn"><b>Обозначения.</b> <i>t</i> — время от начального момента; <i>x</i><sub>0</sub>, <i>v</i><sub>0<i>x</i></sub> — начальные координата и проекция скорости; <i>ℓ</i> — путь; <i>s</i><sub><i>x</i></sub> — проекция перемещения. Проекции <i>v</i><sub><i>x</i></sub>, <i>a</i><sub><i>x</i></sub>, <i>s</i><sub><i>x</i></sub> могут быть отрицательными; модули <i>v</i>, <i>a</i> и путь <i>ℓ</i> — нет. <b>Условия применения формул входят в то, что нужно знать.</b> Что такое проекция — <a href="#dproj">пояснение после термина 10</a>.</div><div class="note solo warn"><b>Формулы в рамке — основные, их нужно знать наизусть.</b> Остальные — определения из раздела 2 и следствия, которые нужно уметь вывести.<br><span class="star">★</span> — материал для старших классов: нужны проекции на две оси, тригонометрия и число π.</div><nav class="ftoc" aria-label="Блоки формул"><a href="#f1">1. Средняя скорость</a><a href="#f2">2. Равномерное</a><a href="#f3">3. Равноускоренное</a><a href="#f4">4. Относительное движение</a><a href="#f5">5. Свободное падение</a><a href="#f6">6. Графики</a><a href="#f7">7. ★ Бросок под углом</a><a href="#f8">8. ★ Окружность</a></nav><div class="note solo fcard" id="f1"><div class="th"><span class="num">1</span><span class="kind">Формулы</span><span class="thn">Перемещение и средняя скорость</span><span class="ref">Л. § 6, 14</span></div><div class="ftab"><div class="frow"><div class="fl">Проекция перемещения</div><div class="ff"><span class="fx"><i>s</i><sub><i>x</i></sub> = <i>x</i><sub>2</sub> − <i>x</i><sub>1</sub></span></div></div><div class="frow"><div class="fl">Путь при движении по прямой без разворотов</div><div class="ff"><span class="fx"><i>ℓ</i> = |<i>s</i><sub><i>x</i></sub>|</span></div></div><div class="frow"><div class="fl">Средняя путевая скорость</div><div class="ff"><span class="fx"><i>v</i><sub>ср.пут</sub> = <span class="fr"><span><i>ℓ</i><sub>общ</sub></span><span><i>t</i><sub>общ</sub></span></span> = <span class="fr"><span><i>ℓ</i><sub>1</sub> + <i>ℓ</i><sub>2</sub> + …</span><span><i>t</i><sub>1</sub> + <i>t</i><sub>2</sub> + …</span></span></span></div></div><div class="frow"><div class="fl">Если на каждом участке скорость постоянна</div><div class="ff"><span class="fx"><i>v</i><sub>ср.пут</sub> = <span class="fr"><span><i>v</i><sub>1</sub><i>t</i><sub>1</sub> + <i>v</i><sub>2</sub><i>t</i><sub>2</sub> + …</span><span><i>t</i><sub>1</sub> + <i>t</i><sub>2</sub> + …</span></span></span></div></div><div class="frow"><div class="fl">Средняя векторная скорость</div><div class="ff"><span class="fx"><span class="vec">v</span><sub>ср</sub> = <span class="fr"><span><span class="vec">s</span></span><span>Δ<i>t</i></span></span>, &nbsp;её проекция <i>v</i><sub>ср,<i>x</i></sub> = <span class="fr"><span><i>x</i><sub>2</sub> − <i>x</i><sub>1</sub></span><span>Δ<i>t</i></span></span></span></div></div><div class="frow"><div class="fl">Два участка с постоянными скоростями, <b>времена</b> движения равны</div><div class="ff"><span class="fx"><i>v</i><sub>ср.пут</sub> = <span class="fr"><span><i>v</i><sub>1</sub> + <i>v</i><sub>2</sub></span><span>2</span></span></span></div></div><div class="frow"><div class="fl">Два участка с постоянными скоростями, <b>пути</b> равны</div><div class="ff"><span class="fx"><i>v</i><sub>ср.пут</sub> = <span class="fr"><span>2<i>v</i><sub>1</sub><i>v</i><sub>2</sub></span><span><i>v</i><sub>1</sub> + <i>v</i><sub>2</sub></span></span></span></div></div></div><p class="fnote">В общее время включаются остановки. Средняя скорость за всю поездку обычно не равна среднему арифметическому скоростей на участках.</p><p class="fnote">Перевод единиц: км/ч → м/с — разделить на 3,6; м/с → км/ч — умножить на 3,6.</p></div><div class="note solo fcard" id="f2"><div class="th"><span class="num">2</span><span class="kind">Формулы</span><span class="thn">Равномерное прямолинейное движение</span><span class="ref">Л. § 9–10</span></div><div class="cond"><b>Условия:</b> <span class="fx"><span class="vec">v</span> = const</span>, <span class="fx"><span class="vec">a</span> = 0</span>.</div><div class="ftab"><div class="frow"><div class="fl">Перемещение</div><div class="ff"><span class="fx"><span class="vec">s</span> = <span class="vec">v</span><i>t</i>, &nbsp;<i>s</i><sub><i>x</i></sub> = <i>v</i><sub><i>x</i></sub><i>t</i></span></div></div><div class="frow"><div class="fl">Координата</div><div class="ff"><span class="fx"><span class="box"><i>x</i>(<i>t</i>) = <i>x</i><sub>0</sub> + <i>v</i><sub><i>x</i></sub><i>t</i></span></span></div></div><div class="frow"><div class="fl">Путь</div><div class="ff"><span class="fx"><i>ℓ</i> = <i>v</i><i>t</i></span></div></div></div><p class="fnote">В одномерной задаче <span class="fx"><i>v</i> = |<i>v</i><sub><i>x</i></sub>|</span>.</p></div><div class="note solo fcard" id="f3"><div class="th"><span class="num">3</span><span class="kind">Формулы</span><span class="thn">Прямолинейное движение с постоянным ускорением</span><span class="ref">Л. § 16–22</span></div><div class="cond"><b>Условие:</b> движение вдоль оси <i>Ox</i>, <span class="fx"><i>a</i><sub><i>x</i></sub> = const</span>. Формулы применимы и к разгону, и к торможению, и к движению с последующим разворотом.</div><div class="ftab"><div class="frow"><div class="fl">Ускорение</div><div class="ff"><span class="fx"><i>a</i><sub><i>x</i></sub> = <span class="fr"><span><i>v</i><sub><i>x</i></sub> − <i>v</i><sub>0<i>x</i></sub></span><span><i>t</i></span></span></span></div></div><div class="frow"><div class="fl">Скорость в момент <i>t</i></div><div class="ff"><span class="fx"><span class="box"><i>v</i><sub><i>x</i></sub>(<i>t</i>) = <i>v</i><sub>0<i>x</i></sub> + <i>a</i><sub><i>x</i></sub><i>t</i></span></span></div></div><div class="frow"><div class="fl">Перемещение через начальную скорость и время</div><div class="ff"><span class="fx"><i>s</i><sub><i>x</i></sub> = <i>v</i><sub>0<i>x</i></sub><i>t</i> + <span class="fr"><span><i>a</i><sub><i>x</i></sub><i>t</i>²</span><span>2</span></span></span></div></div><div class="frow"><div class="fl">Координата</div><div class="ff"><span class="fx"><span class="box"><i>x</i>(<i>t</i>) = <i>x</i><sub>0</sub> + <i>v</i><sub>0<i>x</i></sub><i>t</i> + <span class="fr"><span><i>a</i><sub><i>x</i></sub><i>t</i>²</span><span>2</span></span></span></span></div></div><div class="frow"><div class="fl">Перемещение через начальную и конечную скорости</div><div class="ff"><span class="fx"><i>s</i><sub><i>x</i></sub> = <span class="fr"><span><i>v</i><sub>0<i>x</i></sub> + <i>v</i><sub><i>x</i></sub></span><span>2</span></span>&thinsp;<i>t</i></span></div></div><div class="frow"><div class="fl">Связь скоростей и перемещения без времени</div><div class="ff"><span class="fx"><span class="box"><i>v</i><sub><i>x</i></sub>² − <i>v</i><sub>0<i>x</i></sub>² = 2<i>a</i><sub><i>x</i></sub><i>s</i><sub><i>x</i></sub></span></span></div></div><div class="frow"><div class="fl">Проекция средней скорости</div><div class="ff"><span class="fx"><i>v</i><sub>ср,<i>x</i></sub> = <span class="fr"><span><i>v</i><sub>0<i>x</i></sub> + <i>v</i><sub><i>x</i></sub></span><span>2</span></span></span></div></div></div><div class="fsub"><div class="fsubt">Частный случай: разгон из состояния покоя</div><div class="cond">При постоянном ускорении, <span class="fx"><i>v</i><sub>0</sub> = 0</span>; здесь <span class="fx"><i>a</i> &gt; 0</span> — модуль ускорения.</div><div class="ftab"><div class="frow"><div class="fl">Скорость, путь</div><div class="ff"><span class="fx"><i>v</i> = <i>a</i><i>t</i>, &nbsp;<i>ℓ</i> = <span class="fr"><span><i>a</i><i>t</i>²</span><span>2</span></span>, &nbsp;<i>v</i>² = 2<i>a</i><i>ℓ</i></span></div></div><div class="frow"><div class="fl">Средняя путевая скорость</div><div class="ff"><span class="fx"><i>v</i><sub>ср.пут</sub> = <span class="fr"><span><i>v</i></span><span>2</span></span></span></div></div></div><p class="fnote">За последовательные равные промежутки времени пути относятся как 1 : 3 : 5 : 7 : …</p></div><div class="fsub"><div class="fsubt">Частный случай: торможение до остановки</div><div class="cond"><span class="fx"><i>a</i> &gt; 0</span> — модуль постоянного ускорения, направленного против движения. Формулы действуют до остановки.</div><div class="ftab"><div class="frow"><div class="fl">Скорость, путь</div><div class="ff"><span class="fx"><i>v</i> = <i>v</i><sub>0</sub> − <i>a</i><i>t</i>, &nbsp;<i>ℓ</i> = <i>v</i><sub>0</sub><i>t</i> − <span class="fr"><span><i>a</i><i>t</i>²</span><span>2</span></span></span></div></div><div class="frow"><div class="fl">Время и путь до остановки</div><div class="ff"><span class="fx"><span class="box"><i>t</i><sub>ост</sub> = <span class="fr"><span><i>v</i><sub>0</sub></span><span><i>a</i></span></span></span> &nbsp; <span class="box"><i>ℓ</i><sub>торм</sub> = <span class="fr"><span><i>v</i><sub>0</sub>²</span><span>2<i>a</i></span></span></span></span></div></div></div></div><p class="fnote"><b>Важно:</b> выражение <span class="fx"><i>v</i><sub>0<i>x</i></sub><i>t</i> + <i>a</i><sub><i>x</i></sub><i>t</i>²/2</span> даёт проекцию перемещения. Если тело разворачивалось, путь находят отдельно на участках до и после разворота и складывают.</p><p class="fnote">Средняя путевая скорость <span class="fx"><i>v</i><sub>ср.пут</sub> = (<i>v</i><sub>0</sub> + <i>v</i>)/2</span> — только если направление движения не менялось.</p><p class="fnote">При переменном ускорении отношение <span class="fx"><span class="vec">a</span><sub>ср</sub> = <span class="fr"><span><span class="vec">v</span><sub>2</sub> − <span class="vec">v</span><sub>1</sub></span><span>Δ<i>t</i></span></span></span> определяет среднее ускорение за выбранный промежуток.</p></div><div class="note solo fcard" id="f4"><div class="th"><span class="num">4</span><span class="kind">Формулы</span><span class="thn">Относительное движение, встреча и погоня</span><span class="ref">Л. § 28</span></div><div class="cond">Скорости <span class="fx"><span class="vec">v</span><sub>A</sub></span> и <span class="fx"><span class="vec">v</span><sub>B</sub></span> измерены в одной системе отсчёта. Система, связанная с телом <i>B</i>, движется поступательно (её оси не вращаются).</div><div class="ftab"><div class="frow"><div class="fl">Скорость <i>A</i> относительно <i>B</i></div><div class="ff"><span class="fx"><span class="box"><span class="vec">v</span><sub>A/B</sub> = <span class="vec">v</span><sub>A</sub> − <span class="vec">v</span><sub>B</sub></span> &nbsp; <span class="vec">v</span><sub>A</sub> = <span class="vec">v</span><sub>A/B</sub> + <span class="vec">v</span><sub>B</sub></span></div></div><div class="frow"><div class="fl">Пример</div><div class="ff"><span class="fx"><span class="vec">v</span><sub>лодки/берега</sub> = <span class="vec">v</span><sub>лодки/воды</sub> + <span class="vec">v</span><sub>воды/берега</sub></span></div></div></div><div class="fsub"><div class="fsubt">Равномерное движение вдоль одной прямой; <i>d</i> — начальное расстояние, <i>v</i><sub>1</sub>, <i>v</i><sub>2</sub> — модули скоростей</div><div class="ftab"><div class="frow"><div class="fl">Движение навстречу</div><div class="ff"><span class="fx"><i>t</i><sub>встр</sub> = <span class="fr"><span><i>d</i></span><span><i>v</i><sub>1</sub> + <i>v</i><sub>2</sub></span></span></span></div></div><div class="frow"><div class="fl">Погоня: первый позади и <i>v</i><sub>1</sub> &gt; <i>v</i><sub>2</sub></div><div class="ff"><span class="fx"><i>t</i><sub>дог</sub> = <span class="fr"><span><i>d</i></span><span><i>v</i><sub>1</sub> − <i>v</i><sub>2</sub></span></span></span></div></div><div class="frow"><div class="fl">Расстояние между телами в момент <i>t</i></div><div class="ff"><span class="fx"><i>d</i>(<i>t</i>) = |<i>x</i><sub>2</sub>(<i>t</i>) − <i>x</i><sub>1</sub>(<i>t</i>)|</span></div></div><div class="frow"><div class="fl">Условие встречи</div><div class="ff"><span class="fx"><i>x</i><sub>1</sub>(<i>t</i>) = <i>x</i><sub>2</sub>(<i>t</i>)</span></div></div></div></div></div><div class="note solo fcard" id="f5"><div class="th"><span class="num">5</span><span class="kind">Формулы</span><span class="thn">Свободное падение и вертикальный бросок</span><span class="ref">Л. § 52–54</span></div><div class="cond"><b>Для этого блока и блока 7:</b> сопротивлением воздуха пренебрегаем, <span class="fx"><span class="vec">g</span></span> считаем постоянным; формулы действуют до удара о землю. Вблизи поверхности Земли <span class="fx"><i>g</i> ≈ 9,8 м/с²</span>; в учебных задачах часто принимают 10 м/с².</div><div class="ftab"><div class="frow"><div class="fl">Ось <i>Oy</i> направлена вверх</div><div class="ff"><span class="fx"><i>a</i><sub><i>y</i></sub> = −<i>g</i>, &nbsp;<span class="box"><i>v</i><sub><i>y</i></sub> = <i>v</i><sub>0<i>y</i></sub> − <i>g</i><i>t</i></span></span></div></div><div class="frow"><div class="fl">Координата</div><div class="ff"><span class="fx"><span class="box"><i>y</i> = <i>y</i><sub>0</sub> + <i>v</i><sub>0<i>y</i></sub><i>t</i> − <span class="fr"><span><i>g</i><i>t</i>²</span><span>2</span></span></span></span></div></div><div class="frow"><div class="fl">Без времени</div><div class="ff"><span class="fx"><i>v</i><sub><i>y</i></sub>² − <i>v</i><sub>0<i>y</i></sub>² = −2<i>g</i>(<i>y</i> − <i>y</i><sub>0</sub>)</span></div></div></div><div class="fsub"><div class="fsubt">Частные случаи</div><div class="ftab"><div class="frow"><div class="fl">Падение без начальной скорости с высоты <i>h</i></div><div class="ff"><span class="fx"><i>h</i> = <span class="fr"><span><i>g</i><i>t</i><sub>пад</sub>²</span><span>2</span></span></span></div></div><div class="frow"><div class="fl">Время такого падения</div><div class="ff"><span class="fx"><i>t</i><sub>пад</sub> = <span class="sq"><span class="rt">√</span><span><span class="fr"><span>2<i>h</i></span><span><i>g</i></span></span></span></span></span></div></div><div class="frow"><div class="fl">Модуль скорости перед приземлением</div><div class="ff"><span class="fx"><i>v</i> = <i>g</i><i>t</i><sub>пад</sub> = <span class="sq"><span class="rt">√</span><span>2<i>g</i><i>h</i></span></span></span></div></div><div class="frow"><div class="fl">Бросок вертикально вверх: время подъёма</div><div class="ff"><span class="fx"><i>t</i><sub>под</sub> = <span class="fr"><span><i>v</i><sub>0</sub></span><span><i>g</i></span></span></span></div></div><div class="frow"><div class="fl">Максимальная высота над точкой броска</div><div class="ff"><span class="fx"><i>H</i> = <span class="fr"><span><i>v</i><sub>0</sub>²</span><span>2<i>g</i></span></span></span></div></div><div class="frow"><div class="fl">Время возвращения на высоту броска</div><div class="ff"><span class="fx"><i>t</i><sub>возвр</sub> = <span class="fr"><span>2<i>v</i><sub>0</sub></span><span><i>g</i></span></span></span></div></div></div></div><p class="fnote">При броске вниз <span class="fx"><i>v</i><sub>0<i>y</i></sub> &lt; 0</span>, при броске вверх <span class="fx"><i>v</i><sub>0<i>y</i></sub> &gt; 0</span>.</p></div><div class="note solo fcard" id="f6"><div class="th"><span class="num">6</span><span class="kind">Формулы</span><span class="thn">Связи между графиками движения</span><span class="ref">Л. § 12–13, 19–21</span></div><div class="ftab"><div class="frow"><div class="fl">График <i>x</i>(<i>t</i>), прямой участок</div><div class="ff"><span class="fx"><i>v</i><sub><i>x</i></sub> = <span class="fr"><span>Δ<i>x</i></span><span>Δ<i>t</i></span></span></span></div></div><div class="frow"><div class="fl">График <i>v</i><sub><i>x</i></sub>(<i>t</i>), прямой участок</div><div class="ff"><span class="fx"><i>a</i><sub><i>x</i></sub> = <span class="fr"><span>Δ<i>v</i><sub><i>x</i></sub></span><span>Δ<i>t</i></span></span></span></div></div><div class="frow"><div class="fl">График <i>v</i><sub><i>x</i></sub>(<i>t</i>): проекция перемещения — площадь с учётом знака</div><div class="ff"><span class="fx"><i>s</i><sub><i>x</i></sub> = <i>S</i><sub>+</sub> − <i>S</i><sub>−</sub></span></div></div><div class="frow"><div class="fl">График <i>v</i><sub><i>x</i></sub>(<i>t</i>), движение вдоль одной оси: путь — сумма площадей</div><div class="ff"><span class="fx"><i>ℓ</i> = <i>S</i><sub>+</sub> + <i>S</i><sub>−</sub></span></div></div><div class="frow"><div class="fl">График <i>a</i><sub><i>x</i></sub>(<i>t</i>): изменение проекции скорости — площадь с учётом знака</div><div class="ff"><span class="fx">Δ<i>v</i><sub><i>x</i></sub> = <i>A</i><sub>+</sub> − <i>A</i><sub>−</sub></span></div></div></div><p class="fnote"><i>S</i><sub>+</sub>, <i>A</i><sub>+</sub> — площади над осью времени, <i>S</i><sub>−</sub>, <i>A</i><sub>−</sub> — под ней; все четыре величины неотрицательны и считаются с учётом масштаба осей.</p><p class="fnote">На кривом графике отношения приращений дают средние значения за интервал; мгновенные значения определяются наклоном касательной.</p></div><div class="note solo fcard" id="f7"><div class="th"><span class="num">7</span><span class="kind">Формулы <span class="star">★</span></span><span class="thn">Бросок горизонтально и под углом к горизонту</span><span class="ref">Л. § 112–113</span></div><div class="cond"><b>Для старших классов:</b> нужны проекции на две оси и тригонометрия. Ось <i>Ox</i> горизонтальна, <i>Oy</i> направлена вверх; начальная скорость образует угол <i>α</i> с положительным направлением оси <i>Ox</i>.</div><div class="ftab"><div class="frow"><div class="fl">Начальные проекции скорости</div><div class="ff"><span class="fx"><i>v</i><sub>0<i>x</i></sub> = <i>v</i><sub>0</sub>&thinsp;cos&thinsp;<i>α</i>, &nbsp;<i>v</i><sub>0<i>y</i></sub> = <i>v</i><sub>0</sub>&thinsp;sin&thinsp;<i>α</i></span></div></div><div class="frow"><div class="fl">Проекции скорости во время полёта</div><div class="ff"><span class="fx"><i>v</i><sub><i>x</i></sub> = <i>v</i><sub>0</sub>&thinsp;cos&thinsp;<i>α</i>, &nbsp;<i>v</i><sub><i>y</i></sub> = <i>v</i><sub>0</sub>&thinsp;sin&thinsp;<i>α</i> − <i>g</i><i>t</i></span></div></div><div class="frow"><div class="fl">Координаты</div><div class="ff"><span class="fx"><i>x</i> = <i>x</i><sub>0</sub> + <i>v</i><sub>0</sub>&thinsp;cos&thinsp;<i>α</i>&thinsp;<i>t</i>, &nbsp;<i>y</i> = <i>y</i><sub>0</sub> + <i>v</i><sub>0</sub>&thinsp;sin&thinsp;<i>α</i>&thinsp;<i>t</i> − <span class="fr"><span><i>g</i><i>t</i>²</span><span>2</span></span></span></div></div><div class="frow"><div class="fl">Модуль скорости</div><div class="ff"><span class="fx"><i>v</i> = <span class="sq"><span class="rt">√</span><span><i>v</i><sub><i>x</i></sub>² + <i>v</i><sub><i>y</i></sub>²</span></span></span></div></div><div class="frow"><div class="fl">Бросок вверх (<i>α</i> &gt; 0): время подъёма</div><div class="ff"><span class="fx"><i>t</i><sub>под</sub> = <span class="fr"><span><i>v</i><sub>0</sub>&thinsp;sin&thinsp;<i>α</i></span><span><i>g</i></span></span></span></div></div><div class="frow"><div class="fl">Бросок вверх (<i>α</i> &gt; 0): максимальная высота над точкой броска</div><div class="ff"><span class="fx"><i>H</i> = <span class="fr"><span><i>v</i><sub>0</sub>²&thinsp;sin²&thinsp;<i>α</i></span><span>2<i>g</i></span></span></span></div></div></div><div class="fsub"><div class="fsubt">Приземление на высоте броска</div><div class="ftab"><div class="frow"><div class="fl">Время полёта, дальность по горизонтали</div><div class="ff"><span class="fx"><span class="box"><i>t</i><sub>пол</sub> = <span class="fr"><span>2<i>v</i><sub>0</sub>&thinsp;sin&thinsp;<i>α</i></span><span><i>g</i></span></span></span> &nbsp; <span class="box"><i>L</i> = <span class="fr"><span><i>v</i><sub>0</sub>²&thinsp;sin&thinsp;2<i>α</i></span><span><i>g</i></span></span></span></span></div></div><div class="frow"><div class="fl">Наибольшая дальность при фиксированном <i>v</i><sub>0</sub></div><div class="ff"><span class="fx"><i>L</i><sub>max</sub> = <span class="fr"><span><i>v</i><sub>0</sub>²</span><span><i>g</i></span></span> &nbsp;при&nbsp; <i>α</i> = 45°</span></div></div></div></div><div class="fsub"><div class="fsubt">Бросок горизонтально с высоты <i>h</i> (в общих уравнениях <i>α</i> = 0)</div><div class="ftab"><div class="frow"><div class="fl">Время полёта</div><div class="ff"><span class="fx"><i>t</i><sub>пол</sub> = <span class="sq"><span class="rt">√</span><span><span class="fr"><span>2<i>h</i></span><span><i>g</i></span></span></span></span></span></div></div><div class="frow"><div class="fl">Дальность</div><div class="ff"><span class="fx"><i>L</i> = <i>v</i><sub>0</sub><span class="sq"><span class="rt">√</span><span><span class="fr"><span>2<i>h</i></span><span><i>g</i></span></span></span></span></span></div></div><div class="frow"><div class="fl">Модуль скорости перед приземлением</div><div class="ff"><span class="fx"><i>v</i> = <span class="sq"><span class="rt">√</span><span><i>v</i><sub>0</sub>² + 2<i>g</i><i>h</i></span></span></span></div></div></div></div><p class="fnote">Уравнение траектории при <span class="fx"><i>v</i><sub>0</sub>&thinsp;cos&thinsp;<i>α</i> ≠ 0</span>: <span class="fx"><i>y</i> − <i>y</i><sub>0</sub> = (<i>x</i> − <i>x</i><sub>0</sub>)&thinsp;tg&thinsp;<i>α</i> − <span class="fr"><span><i>g</i>(<i>x</i> − <i>x</i><sub>0</sub>)²</span><span>2<i>v</i><sub>0</sub>²&thinsp;cos²&thinsp;<i>α</i></span></span></span></p></div><div class="note solo fcard" id="f8"><div class="th"><span class="num">8</span><span class="kind">Формулы <span class="star">★</span></span><span class="thn">Равномерное движение по окружности</span><span class="ref">Л. § 27, 115</span></div><div class="cond"><i>R</i> — радиус, <i>N</i> — число оборотов за время <i>t</i>, <i>T</i> — период, <span class="nu">ν</span> (греч. «ню») — частота, <i>ω</i> — модуль угловой скорости.</div><p class="fnote">Угловая скорость показывает, на какой угол (в радианах) поворачивается радиус, проведённый к точке, за единицу времени. Линейная скорость — обычная скорость точки; она направлена по касательной к окружности.</p><div class="ftab"><div class="frow"><div class="fl">Период</div><div class="ff"><span class="fx"><i>T</i> = <span class="fr"><span><i>t</i></span><span><i>N</i></span></span></span></div></div><div class="frow"><div class="fl">Частота</div><div class="ff"><span class="fx"><span class="nu">ν</span> = <span class="fr"><span><i>N</i></span><span><i>t</i></span></span> = <span class="fr"><span>1</span><span><i>T</i></span></span></span></div></div><div class="frow"><div class="fl">Угловая скорость</div><div class="ff"><span class="fx"><i>ω</i> = <span class="fr"><span>2π</span><span><i>T</i></span></span> = 2π<span class="nu">ν</span></span></div></div><div class="frow"><div class="fl">Угол, пройденный по направлению движения</div><div class="ff"><span class="fx">Δ<i>φ</i> = <i>ω</i><i>t</i></span></div></div><div class="frow"><div class="fl">Путь по окружности</div><div class="ff"><span class="fx"><i>ℓ</i> = <i>R</i>&thinsp;Δ<i>φ</i> = 2π<i>R</i><i>N</i></span></div></div><div class="frow"><div class="fl">Линейная скорость</div><div class="ff"><span class="fx"><span class="box"><i>v</i> = <i>ω</i><i>R</i> = <span class="fr"><span>2π<i>R</i></span><span><i>T</i></span></span> = 2π<i>R</i><span class="nu">ν</span></span></span></div></div><div class="frow"><div class="fl">Центростремительное ускорение</div><div class="ff"><span class="fx"><span class="box"><i>a</i><sub>ц</sub> = <span class="fr"><span><i>v</i>²</span><span><i>R</i></span></span> = <i>ω</i>²<i>R</i> = <span class="fr"><span>4π²<i>R</i></span><span><i>T</i>²</span></span> = 4π²<i>R</i><span class="nu">ν</span>²</span></span></div></div></div><p class="fnote"><span class="fx">Δ<i>φ</i></span> измеряется в радианах, <span class="fx"><i>ω</i></span> — в рад/с. Один полный оборот — 2π рад.</p></div><p class="src">Основа: Ландсберг, т. 1, §§ 9–28, 52–54, 112–115.</p>
+</main>
+<footer class="wrap foot"><div class="rl" aria-hidden="true"><span class="rule">················································································································································································································································</span><span>[ <b>Σ</b> ]</span><span class="rule" style="direction:rtl">················································································································································································································································</span></div><p>обновлено 12 ноября 2026</p></footer>
+</body>
+</html>
